@@ -3,19 +3,16 @@ import ArrowDown from '@/app/icons/ArrowDown'
 import ArrowUp from '@/app/icons/ArrowUp'
 import MinusCircle from '@/app/icons/MinusCircle'
 import PlusCircle from '@/app/icons/PlusCircle'
-import { createExerciseGroup } from '@/utils/api'
-import { useUser } from '@clerk/nextjs'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 const CreateEgForm = () => {
   const [hidden, setHidden] = useState(true)
-  const { user } = useUser()
   const [exercises, setExercises] = useState(3)
   const [values, setValues] = useState(['', '', ''])
 
   const createInputByState = () => {
     const inputElements = []
-    for (let i = 3; i < exercises; i++) {
+    for (let i = 1; i < exercises; i++) {
       inputElements.push(
         <input
           key={i}
@@ -32,6 +29,11 @@ const CreateEgForm = () => {
     return inputElements
   }
 
+  const clearInputs = () => {
+    const emptyValues = values.map((newValue) => '')
+    setValues(emptyValues)
+  }
+
   const handleInputOnChange = (index: number, event: any) => {
     const { value } = event.target
     const newValues = [...values]
@@ -42,14 +44,12 @@ const CreateEgForm = () => {
   const handlePlusIconClick = () => {
     setExercises(exercises + 1)
     setValues([...values, ''])
-    console.log(values)
   }
 
   const handleMinusIconClick = () => {
     if (exercises > 2) {
       setExercises(exercises - 1)
       setValues(values.slice(0, -1))
-      console.log(values)
     }
   }
 
@@ -57,7 +57,10 @@ const CreateEgForm = () => {
     <div className="flex flex-col items-center justify-center w-full mb-4">
       <button
         className="rounded-xl p-4 border border-white/40 flex items-center justify-center w-[240px]"
-        onClick={() => setHidden(!hidden)}
+        onClick={() => {
+          setHidden(!hidden)
+          clearInputs()
+        }}
       >
         <div className="mr-2">Create Exercise Group</div>
         {hidden ? <ArrowDown /> : <ArrowUp />}
@@ -78,24 +81,7 @@ const CreateEgForm = () => {
             value={values[0]}
             onChange={(e) => handleInputOnChange(0, e)}
           />
-          <input
-            type="text"
-            className="p-2 mt-2 outline-none bg-stone-700 rounded-xl border-white/40 border w-[340px]"
-            placeholder="Exercise #1"
-            id="input1"
-            name="input1"
-            value={values[1]}
-            onChange={(e) => handleInputOnChange(1, e)}
-          />
-          <input
-            type="text"
-            className="p-2 mt-2 outline-none bg-stone-700 rounded-xl border-white/40 border w-[340px]"
-            placeholder="Exercise #2"
-            id="input2"
-            name="input2"
-            value={values[2]}
-            onChange={(e) => handleInputOnChange(2, e)}
-          />
+
           {createInputByState()}
 
           <div className="flex items-center mx-4">
