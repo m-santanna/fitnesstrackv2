@@ -7,8 +7,8 @@ import Calendar from 'react-calendar'
 type ValuePiece = Date | null
 type Value = ValuePiece | [ValuePiece, ValuePiece]
 
-const Calendary = (userId: any) => {
-  const [date, setDate] = useState<Value>(new Date())
+const CalendarComponent = (userId: any) => {
+  const [date, setDate] = useState<Value>()
   const router = useRouter()
   return (
     <div suppressHydrationWarning>
@@ -20,9 +20,8 @@ const Calendary = (userId: any) => {
 
           router.push(`/dashboard/${userId.userId}/${date}`)
         }}
-        className="p-4 border border-white/40 rounded-3xl"
+        className="p-4 border border-white/40 rounded-3xl components-background"
         calendarType="gregory"
-        tileClassName="p-2 hover:bg-stone-200/20 hover:rounded-full"
         formatShortWeekday={(locale, date) => format(date, 'eeeee')}
         next2Label={null}
         prev2Label={null}
@@ -31,4 +30,4 @@ const Calendary = (userId: any) => {
   )
 }
 
-export default Calendary
+export default CalendarComponent

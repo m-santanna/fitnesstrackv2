@@ -4,6 +4,7 @@ import Link from 'next/link'
 export default function Home() {
   const { userId } = auth()
   const href = userId ? '/dashboard' : '/log-user'
+
   return (
     <div className="h-screen w-screen flex justify-center items-center">
       <div className="flex flex-col justify-center items-center">
