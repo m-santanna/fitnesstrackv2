@@ -5,79 +5,51 @@ import MinusCircle from '@/app/icons/MinusCircle'
 import PlusCircle from '@/app/icons/PlusCircle'
 import { createExerciseGroup } from '@/utils/api'
 import { useUser } from '@clerk/nextjs'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const CreateEgForm = () => {
   const [hidden, setHidden] = useState(true)
   const { user } = useUser()
-  const [exercisesInput, setExercisesInput] = useState([
-    {
-      type: 'text',
-      name: 'groupName',
-      id: 'groupName',
-      placeholder: "Group's Name",
-      className:
-        'p-2 mt-4 outline-none bg-stone-700 rounded-xl border-white/40 border w-[340px]',
-      value: '',
-    },
-    {
-      type: 'text',
-      name: 'Exercise1',
-      id: 'Exercise1',
-      placeholder: 'Exercise #1',
-      className:
-        'p-2 mt-2 outline-none bg-stone-700 rounded-xl border-white/40 border w-[340px]',
-      value: '',
-    },
-    {
-      type: 'text',
-      name: 'Exercise2',
-      id: 'Exercise2',
-      placeholder: 'Exercise #2',
-      className:
-        'p-2 mt-2 outline-none bg-stone-700 rounded-xl border-white/40 border w-[340px]',
-      value: '',
-    },
-  ])
+  const [exercises, setExercises] = useState(3)
+  const [values, setValues] = useState(['', '', ''])
 
-  const inputOnChangeHandle = (e: any) => {
-    const { name, value } = e.target
-    setExercisesInput(
-      exercisesInput.map((input) => {
-        if (input.name === name) {
-          return {
-            ...input,
-            value,
-          }
-        }
-        return input
-      })
-    )
-    console.log(exercisesInput)
+  const createInputByState = () => {
+    const inputElements = []
+    for (let i = 3; i < exercises; i++) {
+      inputElements.push(
+        <input
+          key={i}
+          type="text"
+          name={`input${i}`}
+          id={`input${i}`}
+          placeholder={`Exercise #${i}`}
+          className="p-2 mt-2 outline-none bg-stone-700 rounded-xl border-white/40 border w-[340px]"
+          onChange={(e) => handleInputOnChange(i, e)} // Pass the index to the handler
+          value={values[i]}
+        />
+      )
+    }
+    return inputElements
   }
 
-  const handleSubmit = async () => {
-    await createExerciseGroup(exercisesInput, user?.id)
+  const handleInputOnChange = (index: number, event: any) => {
+    const { value } = event.target
+    const newValues = [...values]
+    newValues[index] = value
+    setValues(newValues)
   }
 
   const handlePlusIconClick = () => {
-    setExercisesInput([
-      ...exercisesInput,
-      {
-        type: 'text',
-        name: `Exercise${exercisesInput.length}`,
-        id: `Exercise${exercisesInput.length}`,
-        placeholder: `Exercise #${exercisesInput.length}`,
-        className:
-          'p-2 mt-2 outline-none bg-stone-700 rounded-xl border-white/40 border w-[340px]',
-        value: '',
-      },
-    ])
+    setExercises(exercises + 1)
+    setValues([...values, ''])
+    console.log(values)
   }
 
   const handleMinusIconClick = () => {
-    if (exercisesInput.length > 3) {
-      setExercisesInput([...exercisesInput.slice(0, -1)])
+    if (exercises > 2) {
+      setExercises(exercises - 1)
+      setValues(values.slice(0, -1))
+      console.log(values)
     }
   }
 
@@ -93,18 +65,38 @@ const CreateEgForm = () => {
 
       <div>
         <form
-          onSubmit={handleSubmit}
           className={
             hidden ? 'hidden' : 'flex flex-col items-center justify-center'
           }
         >
-          {exercisesInput.map((exercise) => (
-            <input
-              {...exercise}
-              key={exercise.id}
-              onChange={inputOnChangeHandle}
-            />
-          ))}
+          <input
+            type="text"
+            className="p-2 mt-4 outline-none bg-stone-700 rounded-xl border-white/40 border w-[340px]"
+            placeholder="Group's Name"
+            id="input0"
+            name="input0"
+            value={values[0]}
+            onChange={(e) => handleInputOnChange(0, e)}
+          />
+          <input
+            type="text"
+            className="p-2 mt-2 outline-none bg-stone-700 rounded-xl border-white/40 border w-[340px]"
+            placeholder="Exercise #1"
+            id="input1"
+            name="input1"
+            value={values[1]}
+            onChange={(e) => handleInputOnChange(1, e)}
+          />
+          <input
+            type="text"
+            className="p-2 mt-2 outline-none bg-stone-700 rounded-xl border-white/40 border w-[340px]"
+            placeholder="Exercise #2"
+            id="input2"
+            name="input2"
+            value={values[2]}
+            onChange={(e) => handleInputOnChange(2, e)}
+          />
+          {createInputByState()}
 
           <div className="flex items-center mx-4">
             <PlusCircle
