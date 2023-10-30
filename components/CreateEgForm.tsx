@@ -3,10 +3,13 @@ import ArrowDown from '@/app/icons/ArrowDown'
 import ArrowUp from '@/app/icons/ArrowUp'
 import MinusCircle from '@/app/icons/MinusCircle'
 import PlusCircle from '@/app/icons/PlusCircle'
+import { createExerciseGroup } from '@/utils/api'
+import { useUser } from '@clerk/nextjs'
 import { useState } from 'react'
 
 const CreateEgForm = () => {
   const [hidden, setHidden] = useState(true)
+  const { user } = useUser()
   const [exercisesInput, setExercisesInput] = useState([
     {
       type: 'text',
@@ -53,8 +56,8 @@ const CreateEgForm = () => {
     console.log(exercisesInput)
   }
 
-  const handleSubmit = () => {
-    console.log(exercisesInput)
+  const handleSubmit = async () => {
+    await createExerciseGroup(exercisesInput, user?.id)
   }
 
   const handlePlusIconClick = () => {
@@ -90,6 +93,7 @@ const CreateEgForm = () => {
 
       <div>
         <form
+          onSubmit={handleSubmit}
           className={
             hidden ? 'hidden' : 'flex flex-col items-center justify-center'
           }
@@ -113,10 +117,7 @@ const CreateEgForm = () => {
               onClick={handleMinusIconClick}
             />
           </div>
-          <button
-            className="hover:cursor-pointer border-white/40 border rounded-xl px-4 py-2"
-            onClick={handleSubmit}
-          >
+          <button className="hover:cursor-pointer border-white/40 border rounded-xl px-4 py-2">
             Create
           </button>
         </form>

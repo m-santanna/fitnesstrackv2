@@ -12,13 +12,19 @@ export const getSetsByDay = async (date, userId) => {
   return sets;
 }
 
-export const createExerciseGroup = async (props) => {
-  const user = await getUserByClerkId()
+export const createExerciseGroup = async (exerciseList: any, clerkId: any) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      clerkId: clerkId as string
+    }
+  })
+  const groupName = exerciseList[0].groupName
+  const exercisesName = exerciseList.map((exercise: any) => exercise.exerciseName)
   const exerciseGroup = await prisma.exerciseGroup.create({
     data: {
-      groupName: props.groupName,
+      groupName: groupName,
       userId: user.id,
-      exercisesName: props.exercisesName,
+      exercisesName: exercisesName,
     },
   });
   return exerciseGroup
