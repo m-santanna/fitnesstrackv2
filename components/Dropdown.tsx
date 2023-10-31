@@ -24,6 +24,15 @@ const Dropdown = ({ name, exercises, className }: any) => {
             type="text"
             value={exercise}
             className="p-2 outline-none border-x bg-stone-700 border-white/40 w-full"
+            onChange={(e) => {
+              const newValues = values.map((value: any) => {
+                if (value === exercise) {
+                  return e.target.value
+                }
+                return value
+              })
+              setValues(newValues)
+            }}
           />
         ))}
       </form>
