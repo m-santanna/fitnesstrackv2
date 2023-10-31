@@ -47,7 +47,7 @@ const CreateEgForm = () => {
   }
 
   const handleMinusIconClick = () => {
-    if (exercises > 2) {
+    if (exercises > 3) {
       setExercises(exercises - 1)
       setValues(values.slice(0, -1))
     }
@@ -56,7 +56,7 @@ const CreateEgForm = () => {
   return (
     <div className="flex flex-col items-center justify-center w-full mb-4">
       <button
-        className="rounded-xl p-4 border border-white/40 flex items-center justify-center w-[240px]"
+        className="rounded-xl p-4 border border-white/40 flex items-center justify-center w-3/5"
         onClick={() => {
           setHidden(!hidden)
           clearInputs()
