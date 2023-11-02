@@ -4,11 +4,19 @@ import ArrowUp from '@/app/icons/ArrowUp'
 import MinusCircle from '@/app/icons/MinusCircle'
 import PlusCircle from '@/app/icons/PlusCircle'
 import { useState } from 'react'
+import SubmitFormButton from './SubmitFormButton'
+import { useFormState } from 'react-dom'
+import { createExerciseGroup } from '@/utils/actions'
+
+const initialState = {
+  message: null,
+}
 
 const CreateEgForm = () => {
   const [hidden, setHidden] = useState(true)
   const [exercises, setExercises] = useState(3)
   const [values, setValues] = useState(['', '', ''])
+  const [state, formAction] = useFormState(createExerciseGroup, initialState)
 
   const createInputByState = () => {
     const inputElements = []
@@ -17,8 +25,8 @@ const CreateEgForm = () => {
         <input
           key={i}
           type="text"
-          name={`input${i}`}
-          id={`input${i}`}
+          name={'exercisesName'}
+          id={'exercisesName'}
           placeholder={`Exercise #${i}`}
           className="p-2 mt-2 outline-none bg-stone-700 rounded-xl border-white/40 border w-[340px]"
           onChange={(e) => handleInputOnChange(i, e)} // Pass the index to the handler
@@ -68,6 +76,7 @@ const CreateEgForm = () => {
 
       <div>
         <form
+          action={formAction}
           className={
             hidden ? 'hidden' : 'flex flex-col items-center justify-center'
           }
@@ -76,8 +85,8 @@ const CreateEgForm = () => {
             type="text"
             className="p-2 mt-4 outline-none bg-stone-700 rounded-xl border-white/40 border w-[340px]"
             placeholder="Group's Name"
-            id="input0"
-            name="input0"
+            id="groupName"
+            name="groupName"
             value={values[0]}
             onChange={(e) => handleInputOnChange(0, e)}
           />
@@ -95,9 +104,10 @@ const CreateEgForm = () => {
               onClick={handleMinusIconClick}
             />
           </div>
-          <button className="hover:cursor-pointer border-white/40 border rounded-xl px-4 py-2">
-            Create
-          </button>
+          <SubmitFormButton
+            buttonName="Create"
+            className="hover:cursor-pointer border-white/40 border rounded-xl px-4 py-2"
+          />
         </form>
       </div>
     </div>
