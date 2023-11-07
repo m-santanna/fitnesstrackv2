@@ -7,6 +7,7 @@ import { useState } from 'react'
 import SubmitFormButton from './SubmitFormButton'
 import { useFormState } from 'react-dom'
 import { createExerciseGroup } from '@/utils/actions'
+import { useFormStatus } from 'react-dom'
 
 const initialState = {
   message: null,
@@ -16,6 +17,8 @@ const CreateEgForm = () => {
   const [hidden, setHidden] = useState(true)
   const [exercises, setExercises] = useState(3)
   const [values, setValues] = useState(['', '', ''])
+  const { pending } = useFormStatus()
+
   const [state, formAction] = useFormState(createExerciseGroup, initialState)
 
   const createInputByState = () => {
@@ -107,6 +110,8 @@ const CreateEgForm = () => {
           <SubmitFormButton
             buttonName="Create"
             className="hover:cursor-pointer border-white/40 border rounded-xl px-4 py-2"
+            pending={pending}
+            log="pending"
           />
         </form>
       </div>
