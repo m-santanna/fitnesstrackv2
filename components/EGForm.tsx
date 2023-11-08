@@ -82,7 +82,7 @@ const EGForm = () => {
             className="w-12 h-12 mr-2 hover:cursor-pointer"
             onClick={handlePlusIconClick}
           />
-          <div className=" cursor-default">/</div>
+          <div className="cursor-default">/</div>
           <MinusCircle
             className={'w-12 h-12 ml-2 hover:cursor-pointer'}
             onClick={handleMinusIconClick}

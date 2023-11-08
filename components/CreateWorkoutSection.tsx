@@ -2,20 +2,11 @@
 import ArrowDown from '@/app/icons/ArrowDown'
 import ArrowUp from '@/app/icons/ArrowUp'
 import { useState } from 'react'
+import ExerciseInput from './ExerciseInput'
 
 const CreateWorkoutSection = () => {
   const [hidden, setHidden] = useState(true)
 
-  const createSetInput = () => {
-    return (
-      <div className="flex flex-col justify-center items-center">
-        <input type="number" name="exercise" id="exercise" />
-        <input type="text" name="weight" id="weight" />
-        <input type="text" name="reps" id="reps" />
-        <input type="text" name="sets" id="sets" />
-      </div>
-    )
-  }
   return (
     <div className="flex flex-col justify-center items-center">
       <button
@@ -32,7 +23,7 @@ const CreateWorkoutSection = () => {
           hidden ? 'hidden' : 'flex flex-col items-center justify-center'
         }
       >
-        {createSetInput()}
+        <ExerciseInput />
       </form>
     </div>
   )
