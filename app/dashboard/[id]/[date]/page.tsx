@@ -1,19 +1,30 @@
+import CreateWorkoutSection from '@/components/CreateWorkoutSection'
+import WorkoutSection from '@/components/WorkoutSection'
 import { getSetsByDay } from '@/utils/api'
 import { format } from 'date-fns'
 
-const SetsPage = async ({ params }) => {
+const SetsPage = async ({ params }: any) => {
   const sets = await getSetsByDay(params.date, params.id)
   console.log(sets)
   const workedOut = sets.length === 0 ? false : true
+  const heading = 'text-2xl flex justify-center items-center p-4 my-4'
   return (
     <div>
       {!workedOut ? (
-        <h1>
-          You don't have any workouts on{' '}
-          {format(new Date(params.date), 'MMMM do')} registered!
-        </h1>
+        <>
+          <h1 className={heading}>
+            You don't have any workouts on{' '}
+            {format(new Date(params.date), 'MMMM do')} registered!
+          </h1>
+          <CreateWorkoutSection />
+        </>
       ) : (
-        <h1>Your workout on {format(new Date(params.date), 'MMMM do')}:</h1>
+        <>
+          <h1 className={heading}>
+            Your workout on {format(new Date(params.date), 'MMMM do')}:
+          </h1>
+          <WorkoutSection sets={sets} />
+        </>
       )}
     </div>
   )

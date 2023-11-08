@@ -1,4 +1,3 @@
-import { getUserByClerkId } from "./auth";
 import { prisma } from "./db";
 import { User } from '@prisma/client'
 

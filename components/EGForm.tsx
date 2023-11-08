@@ -3,6 +3,7 @@ import { createExerciseGroup } from '@/utils/actions'
 import { useState } from 'react'
 import MinusCircle from '@/app/icons/MinusCircle'
 import PlusCircle from '@/app/icons/PlusCircle'
+import { useFormStatus } from 'react-dom'
 
 const EGForm = () => {
   const [exercises, setExercises] = useState(3)
@@ -13,6 +14,7 @@ const EGForm = () => {
     for (let i = 1; i < exercises; i++) {
       inputElements.push(
         <input
+          required
           key={i}
           type="text"
           name={'exercisesName'}
@@ -25,6 +27,19 @@ const EGForm = () => {
       )
     }
     return inputElements
+  }
+
+  function Submit() {
+    const { pending } = useFormStatus()
+    return (
+      <button
+        type="submit"
+        className="border border-white/40 rounded-3xl p-2 m-2"
+        disabled={pending}
+      >
+        {pending ? 'Submitting...' : 'Submit'}
+      </button>
+    )
   }
 
   const handleInputOnChange = (index: number, event: any) => {
@@ -50,6 +65,7 @@ const EGForm = () => {
       <h1 className="text-4xl my-8">Exercise Group Info</h1>
       <form action={createExerciseGroup} className="flex flex-col w-96">
         <input
+          required
           type="text"
           className="p-2 mt-4 outline-none bg-stone-700 rounded-xl border-white/40 border"
           placeholder="Group's Name"
@@ -72,12 +88,7 @@ const EGForm = () => {
             onClick={handleMinusIconClick}
           />
         </div>
-        <button
-          type="submit"
-          className="border border-white/40 rounded-3xl p-2 m-2"
-        >
-          Submit
-        </button>
+        <Submit />
       </form>
     </div>
   )
