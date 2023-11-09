@@ -11,7 +11,7 @@ const ExerciseGroupContainer = async (user: User) => {
         <div className="m-2 flex justify-center items-center">
           <Link
             href="/dashboard/create-exercise-group"
-            className="border border-white/40 text-center p-2 m-2 rounded-3xl bg-orange-900 hover:bg-orange-950"
+            className="border border-white/40 text-center p-2 mt-2 mb-4 rounded-lg bg-orange-900 hover:bg-orange-950"
             children="Create Exercise Group"
           />
         </div>

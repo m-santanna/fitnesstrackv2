@@ -3,7 +3,7 @@ import { createExerciseGroup } from '@/utils/actions'
 import { useState } from 'react'
 import MinusCircle from '@/app/icons/MinusCircle'
 import PlusCircle from '@/app/icons/PlusCircle'
-import { useFormStatus } from 'react-dom'
+import SubmitButton from './SubmitButton'
 
 const EGForm = () => {
   const [exercises, setExercises] = useState(3)
@@ -27,19 +27,6 @@ const EGForm = () => {
       )
     }
     return inputElements
-  }
-
-  function Submit() {
-    const { pending } = useFormStatus()
-    return (
-      <button
-        type="submit"
-        className="border border-white/40 rounded-3xl p-2 m-2"
-        disabled={pending}
-      >
-        {pending ? 'Submitting...' : 'Submit'}
-      </button>
-    )
   }
 
   const handleInputOnChange = (index: number, event: any) => {
@@ -77,7 +64,7 @@ const EGForm = () => {
 
         {createInputByState()}
 
-        <div className="flex justify-center items-center mt-2 mx-4">
+        <div className="flex justify-center items-center my-2 mx-4">
           <PlusCircle
             className="w-12 h-12 mr-2 hover:cursor-pointer"
             onClick={handlePlusIconClick}
@@ -88,7 +75,7 @@ const EGForm = () => {
             onClick={handleMinusIconClick}
           />
         </div>
-        <Submit />
+        <SubmitButton />
       </form>
     </div>
   )

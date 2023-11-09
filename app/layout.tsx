@@ -17,7 +17,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className="bg-black text-white">
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className="bg-black text-white font-serif"
+    >
       <ClerkProvider
         appearance={{
           baseTheme: dark,

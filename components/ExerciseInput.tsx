@@ -17,8 +17,9 @@ const ExerciseInput = (props: ExerciseInputProps) => {
     const inputDivs = []
     for (let i = 0; i < sets; i++) {
       inputDivs.push(
-        <div className="flex justify-between items-center">
-          <p className="mr-4 mt-2">{i + 1}.</p>
+        <div className="flex components-background">
+          <p className="mx-4 mt-2 proportional-nums">{i + 1}.</p>
+
           <input
             required
             key={i}
@@ -26,7 +27,7 @@ const ExerciseInput = (props: ExerciseInputProps) => {
             name={'currentWeight'}
             id={'currentWeight'}
             placeholder={`Weight`}
-            className="p-2 mt-2 outline-none bg-stone-700 border-white/40 border"
+            className="p-2 outline-none bg-stone-700 border-white/40 border"
             onChange={(e) => handleWeightChange(i, e)}
             value={weights[i]}
           />
@@ -37,7 +38,7 @@ const ExerciseInput = (props: ExerciseInputProps) => {
             name={'reps'}
             id={'reps'}
             placeholder={`Reps`}
-            className="p-2 mt-2 outline-none bg-stone-700 border-white/40 border"
+            className="p-2 outline-none bg-stone-700 border-white/40 border"
             onChange={(e) => handleRepsChange(i, e)}
             value={reps[i]}
           />
@@ -75,16 +76,17 @@ const ExerciseInput = (props: ExerciseInputProps) => {
     }
   }
   return (
-    <div className="m-2">
+    <div className="flex flex-col justify-center items-center border border-white/40">
       <input
         type="text"
         name="exerciseName"
+        placeholder="Exercise Name"
         onChange={(e) => setName(e.target.value)}
-        className="p-2 outline-none bg-stone-700 rounded-xl border-white/40 border"
+        className="p-2 outline-none bg-stone-700 w-full border-white/40 border"
         value={name}
       />
       {createInputByState()}
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center components-background w-full">
         <PlusCircle
           onClick={handlePlusIconClick}
           className="w-12 h-12 mx-2 hover:cursor-pointer"
