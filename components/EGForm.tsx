@@ -8,6 +8,7 @@ import SubmitButton from './SubmitButton'
 const EGForm = () => {
   const [exercises, setExercises] = useState(3)
   const [values, setValues] = useState(['', '', ''])
+  const [disabledMinus, setDisabledMinus] = useState(true)
 
   const createInputByState = () => {
     const inputElements = []
@@ -39,14 +40,22 @@ const EGForm = () => {
   const handlePlusIconClick = () => {
     setExercises(exercises + 1)
     setValues([...values, ''])
+    setDisabledMinus(false)
   }
 
   const handleMinusIconClick = () => {
-    if (exercises > 3) {
+    if (exercises > 4) {
       setExercises(exercises - 1)
       setValues(values.slice(0, -1))
+    } else if (exercises === 4) {
+      setExercises(exercises - 1)
+      setValues(values.slice(0, -1))
+      setDisabledMinus(true)
+    } else {
+      setDisabledMinus(true)
     }
   }
+
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-4xl my-8">Exercise Group Info</h1>
@@ -64,18 +73,25 @@ const EGForm = () => {
 
         {createInputByState()}
 
-        <div className="flex justify-center items-center my-2 mx-4">
+        <div className="flex justify-center items-center mx-4">
           <PlusCircle
-            className="w-12 h-12 mr-2 hover:cursor-pointer"
+            className={
+              disabledMinus
+                ? 'w-12 h-12 hover:cursor-pointer hover:text-white/80'
+                : 'w-12 h-12 mx-2 hover:cursor-pointer hover:text-white/80'
+            }
             onClick={handlePlusIconClick}
           />
-          <div className="cursor-default">/</div>
           <MinusCircle
-            className={'w-12 h-12 ml-2 hover:cursor-pointer'}
+            className={
+              disabledMinus
+                ? 'text-transparent hidden'
+                : 'w-12 h-12 mx-2 hover:cursor-pointer hover:text-white/80'
+            }
             onClick={handleMinusIconClick}
           />
         </div>
-        <SubmitButton />
+        <SubmitButton className="border border-white/40 rounded-xl px-4 py-2 w-full" />
       </form>
     </div>
   )

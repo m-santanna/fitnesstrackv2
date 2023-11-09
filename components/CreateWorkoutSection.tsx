@@ -58,7 +58,7 @@ const CreateWorkoutSection = () => {
             Remove Last
           </div>
         </div>
-        <SubmitButton />
+        <SubmitButton className="border border-white/40 px-4 py-2 w-full" />
       </form>
     </div>
   )

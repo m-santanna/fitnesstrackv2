@@ -1,6 +1,7 @@
 'use client'
 import MinusCircle from '@/app/icons/MinusCircle'
 import PlusCircle from '@/app/icons/PlusCircle'
+import { set } from 'date-fns'
 import { useState } from 'react'
 
 interface ExerciseInputProps {
@@ -12,6 +13,7 @@ const ExerciseInput = (props: ExerciseInputProps) => {
   const [sets, setSets] = useState(1)
   const [weights, setWeights] = useState([''])
   const [reps, setReps] = useState([''])
+  const [disabledMinus, setDisabledMinus] = useState(true)
 
   const createInputByState = () => {
     const inputDivs = []
@@ -66,15 +68,24 @@ const ExerciseInput = (props: ExerciseInputProps) => {
     setSets(sets + 1)
     setWeights([...weights, ''])
     setReps([...reps, ''])
+    setDisabledMinus(false)
   }
 
   const handleMinusIconClick = () => {
-    if (sets > 1) {
+    if (sets > 2) {
       setSets(sets - 1)
       setWeights(weights.slice(0, -1))
       setReps(reps.slice(0, -1))
+    } else if (sets === 2) {
+      setSets(sets - 1)
+      setWeights(weights.slice(0, -1))
+      setReps(reps.slice(0, -1))
+      setDisabledMinus(true)
+    } else {
+      setDisabledMinus(true)
     }
   }
+
   return (
     <div className="flex flex-col justify-center items-center border border-white/40">
       <input
@@ -89,12 +100,19 @@ const ExerciseInput = (props: ExerciseInputProps) => {
       <div className="flex justify-center items-center components-background w-full">
         <PlusCircle
           onClick={handlePlusIconClick}
-          className="w-12 h-12 mx-2 hover:cursor-pointer"
+          className={
+            disabledMinus
+              ? 'w-12 h-12 hover:cursor-pointer hover:text-white/80'
+              : 'w-12 h-12 mx-2 hover:cursor-pointer hover:text-white/80'
+          }
         />
-        <p className="cursor-default">/</p>
         <MinusCircle
           onClick={handleMinusIconClick}
-          className="w-12 h-12 mx-2 hover:cursor-pointer"
+          className={
+            disabledMinus
+              ? 'text-transparent hidden'
+              : 'w-12 h-12 mx-2 hover:cursor-pointer hover:text-white/80'
+          }
         />
       </div>
     </div>

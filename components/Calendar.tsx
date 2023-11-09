@@ -14,7 +14,7 @@ const CalendarComponent = (userId: any) => {
     <div suppressHydrationWarning>
       <Calendar
         value={date}
-        onChange={async (value) => {
+        onChange={(value) => {
           setDate(value)
           const date = format(value as Date, 'yyyy-MM-dd')
 
