@@ -1,7 +1,6 @@
 'use client'
 import MinusCircle from '@/app/icons/MinusCircle'
 import PlusCircle from '@/app/icons/PlusCircle'
-import { set } from 'date-fns'
 import { useState } from 'react'
 
 interface ExerciseInputProps {
@@ -89,6 +88,7 @@ const ExerciseInput = (props: ExerciseInputProps) => {
   return (
     <div className="flex flex-col justify-center items-center border border-white/40">
       <input
+        required
         type="text"
         name="exerciseName"
         placeholder="Exercise Name"

@@ -4,7 +4,7 @@ import { getSetsByDay } from '@/utils/api'
 import { format } from 'date-fns'
 
 const SetsPage = async ({ params }: any) => {
-  const sets = await getSetsByDay(params.date, params.id)
+  const sets = await getSetsByDay(params.date, params.userId)
   console.log(sets)
   const workedOut = sets.length === 0 ? false : true
   const heading = 'text-2xl flex justify-center items-center p-4 my-4'

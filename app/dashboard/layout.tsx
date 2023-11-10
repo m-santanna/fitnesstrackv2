@@ -3,8 +3,17 @@ import ExerciseGroupContainer from '@/components/ExerciseGroupContainer'
 import { getUserByClerkId } from '@/utils/auth'
 import { UserButton } from '@clerk/nextjs'
 
-const DashboardLayout = async ({ children }: any) => {
+const DashboardLayout = async ({
+  children,
+  params,
+}: {
+  children: React.ReactNode
+  params: {
+    userId: string
+  }
+}) => {
   const user = await getUserByClerkId()
+  params.userId = user.id
   return (
     <div className="h-screen w-screen">
       <header className="top-0 left-0 sticky w-full h-[60px] components-background border-b border-white/40">
@@ -17,7 +26,7 @@ const DashboardLayout = async ({ children }: any) => {
       </header>
       <div className="w-full h-[calc(100vh-60px)] flex">
         <aside className="h-full w-[600px] p-4">
-          <Calendar userId={user.id} />
+          <Calendar />
           <ExerciseGroupContainer user={user} />
         </aside>
         <div className="h-full w-full p-4">{children}</div>

@@ -18,7 +18,7 @@ const CalendarComponent = (userId: any) => {
           setDate(value)
           const date = format(value as Date, 'yyyy-MM-dd')
 
-          router.push(`/dashboard/${userId.userId}/${date}`)
+          router.push(`/dashboard/${date}`)
         }}
         className="p-4 border border-white/40 rounded-3xl components-background"
         calendarType="gregory"
