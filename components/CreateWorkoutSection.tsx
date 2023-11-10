@@ -37,7 +37,7 @@ const CreateWorkoutSection = () => {
   return (
     <div className="flex flex-col justify-center items-center">
       <button
-        className="rounded-xl p-4 mb-6 border border-white/40 flex items-center justify-center hover:text-white/80 hover:border-white/20"
+        className="rounded-xl p-4 mb-6 border bg-stone-900 border-white/40 flex items-center justify-center hover:text-white/80 hover:bg-stone-950"
         onClick={() => {
           setHidden(!hidden)
         }}
@@ -56,8 +56,8 @@ const CreateWorkoutSection = () => {
             onClick={handleAddClick}
             className={
               disabledRemove
-                ? 'w-full p-2 border text-center border-white/40 hover:cursor-pointer hover:text-white/80 hover:border-white/10'
-                : 'w-1/2 p-2 border text-center border-white/40 hover:cursor-pointer hover:text-white/80 hover:border-white/10'
+                ? 'w-full p-2 border bg-stone-900 text-center border-white/40 hover:cursor-pointer hover:text-white/80 hover:bg-stone-950'
+                : 'w-1/2 p-2 border bg-stone-900 text-center border-white/40 hover:cursor-pointer hover:text-white/80 hover:bg-stone-950'
             }
           >
             {disabledRemove ? 'Add New Exercise' : 'Add New'}
@@ -67,13 +67,13 @@ const CreateWorkoutSection = () => {
             className={
               disabledRemove
                 ? 'text-transparent hidden'
-                : 'w-1/2 p-2 border text-center border-white/40 hover:cursor-pointer hover:text-white/80 hover:border-white/10'
+                : 'w-1/2 p-2 border bg-stone-900 text-center border-white/40 hover:cursor-pointer hover:text-white/80 hover:bg-stone-950'
             }
           >
             Remove Last
           </div>
         </div>
-        <SubmitButton className="border border-white/40 px-4 py-2 w-full hover:text-white/80 hover:border-white/10" />
+        <SubmitButton className="border bg-stone-900 border-white/40 px-4 py-2 w-full hover:text-white/80 hover:bg-stone-950" />
       </form>
     </div>
   )

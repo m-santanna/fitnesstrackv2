@@ -10,8 +10,8 @@ const ExerciseGroupContainer = async ({ userId }: { userId: string }) => {
         <div className="m-2 flex justify-center items-center">
           <Link
             href="/dashboard/create-exercise-group"
-            className="border border-white/40 text-center p-2 mt-2 mb-4 rounded-lg bg-orange-900 hover:bg-orange-950"
-            children="Create Exercise Group"
+            className="border border-white/40 text-center p-4 mt-2 mb-4 rounded-lg bg-stone-900 hover:bg-stone-950 hover:text-white/80"
+            children="Create New Exercise Group"
           />
         </div>
         {exerciseGroups.map((exerciseGroup) => (

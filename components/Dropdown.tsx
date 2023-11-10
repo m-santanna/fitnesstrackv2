@@ -8,7 +8,7 @@ const Dropdown = ({ name, exercises, className }: any) => {
   return (
     <div className={className}>
       <button
-        className="p-2 border border-white/40 rounded-xl w-11/12 mx-10"
+        className="p-2 border border-white/40 rounded-xl w-11/12 mx-10 hover:text-white/80 hover:bg-stone-950"
         onClick={() => {
           setHidden(!hidden)
         }}
