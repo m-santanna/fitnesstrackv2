@@ -1,6 +1,4 @@
 import { prisma } from "./db";
-import { User } from '@prisma/client'
-
 
 export const getSetsByDay = async (date: string, userId: string) => {
   const sets = await prisma.exerciseSet.findMany({
@@ -31,11 +29,11 @@ export const createExerciseGroup = async (exerciseList: any, clerkId: any) => {
   return exerciseGroup
 }
 
-export const getExerciseGroups = async (user: User) => {
+export const getExerciseGroups = async (userId: string) => {
   const exerciseGroup = await prisma.exerciseGroup.findMany({
     where: {
-      userId: user?.id,
-    },
+      userId: userId
+    }
   })
   return exerciseGroup
 }

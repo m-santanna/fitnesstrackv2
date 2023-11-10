@@ -27,7 +27,7 @@ const DashboardLayout = async ({
       <div className="w-full h-[calc(100vh-60px)] flex">
         <aside className="h-full w-[600px] p-4">
           <Calendar />
-          <ExerciseGroupContainer user={user} />
+          <ExerciseGroupContainer userId={user.id} />
         </aside>
         <div className="h-full w-full p-4">{children}</div>
       </div>

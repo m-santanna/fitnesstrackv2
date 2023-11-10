@@ -1,10 +1,9 @@
 import Dropdown from './Dropdown'
 import { getExerciseGroups } from '@/utils/api'
-import { User } from '@prisma/client'
 import Link from 'next/link'
 
-const ExerciseGroupContainer = async (user: User) => {
-  const exerciseGroups = await getExerciseGroups(user)
+const ExerciseGroupContainer = async ({ userId }: { userId: string }) => {
+  const exerciseGroups = await getExerciseGroups(userId)
   return (
     <div className="w-full h-[calc(100vh-410px)] border border-white/40 components-background overflow-auto rounded-3xl mt-4">
       <div className="flex-col justify-center mt-4">
