@@ -24,7 +24,7 @@ const ExerciseInput = (props: ExerciseInputProps) => {
           <input
             required
             key={i}
-            type="text"
+            type="number"
             name={'currentWeight'}
             id={'currentWeight'}
             placeholder={`Weight`}
@@ -35,7 +35,7 @@ const ExerciseInput = (props: ExerciseInputProps) => {
           <input
             required
             key={i}
-            type="text"
+            type="number"
             name={'reps'}
             id={'reps'}
             placeholder={`Reps`}
@@ -96,7 +96,10 @@ const ExerciseInput = (props: ExerciseInputProps) => {
         className="p-2 outline-none bg-stone-700 w-full border-white/40 border"
         value={name}
       />
+      <input type="hidden" name="setCount" id="setCount" value={sets} />
+
       {createInputByState()}
+
       <div className="flex justify-center items-center components-background w-full">
         <PlusCircle
           onClick={handlePlusIconClick}

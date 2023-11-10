@@ -5,19 +5,27 @@ import { prisma } from "./db"
 import { redirect } from "next/navigation"
 import z from "zod"
 
-const schema = z.object({
+const schemaEG = z.object({
     groupName: z.string().min(1),
     exercisesName: z.array(z.string().min(1)),
 })
 
+const schemaSet = z.object({
+    exercisesName: z.array(z.string().min(1)),
+    setCount: z.array(z.string().min(1)),
+    currentWeightArray: z.array(z.string().min(1)),
+    repsArray: z.array(z.string().min(1)),
+    timestamp: z.string().min(1),
+})
+
 export const createExerciseGroup = async (formData: FormData) => {
-    const parsed = schema.parse({
+    const parsed = schemaEG.parse({
             groupName: formData.get("groupName"),
             exercisesName: formData.getAll("exercisesName"),
     })
 
     const user = await getUserByClerkId()
-    const exerciseGroup = await prisma.exerciseGroup.create({
+    await prisma.exerciseGroup.create({
         data: {
             groupName: parsed.groupName,
             userId: user.id,
@@ -26,4 +34,35 @@ export const createExerciseGroup = async (formData: FormData) => {
     })
     revalidatePath("/dashboard")
     redirect("/dashboard")
+}
+
+
+export const createWorkout = async (formData: FormData) => {
+    const user = await getUserByClerkId()
+    const parsed = schemaSet.parse({
+            exercisesName: formData.getAll("exerciseName"),
+            setCount: formData.getAll("setCount"),
+            currentWeightArray: formData.getAll("currentWeight"),
+            repsArray: formData.getAll("reps"),
+            timestamp: formData.get("timestamp"),
+    })
+    
+    let index = 0;
+    for (let i = 0; i < parsed.exercisesName.length; i++) {
+        const exerciseName = parsed.exercisesName[i]
+        const setCount = Number(parsed.setCount[i])
+        const currentWeight = parsed.currentWeightArray.slice(index, index + setCount).map(Number)
+        const reps = parsed.repsArray.slice(index, index + setCount).map(Number)
+        index += setCount
+        await prisma.exerciseSet.create({
+            data: {
+                exerciseName: exerciseName,
+                currentWeight: currentWeight,
+                reps: reps,
+                userId: user.id,
+                timestamp: parsed.timestamp,
+            }
+        })
+    }
+    revalidatePath(`/dashboard/${parsed.timestamp}`)
 }

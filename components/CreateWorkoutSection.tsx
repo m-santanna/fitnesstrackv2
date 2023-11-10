@@ -4,8 +4,15 @@ import ArrowUp from '@/app/icons/ArrowUp'
 import { useState } from 'react'
 import ExerciseInput from './ExerciseInput'
 import SubmitButton from './SubmitButton'
+import { createWorkout } from '@/utils/actions'
 
-const CreateWorkoutSection = () => {
+const CreateWorkoutSection = ({
+  params,
+}: {
+  params: {
+    date: string
+  }
+}) => {
   const [hidden, setHidden] = useState(true)
   const [exercises, setExercises] = useState(1)
   const [disabledRemove, setDisabledRemove] = useState(true)
@@ -33,11 +40,11 @@ const CreateWorkoutSection = () => {
     }
     return exerciseInputs
   }
-
   return (
     <div className="flex flex-col justify-center items-center">
       <button
-        className="rounded-xl p-4 mb-6 border bg-stone-900 border-white/40 flex items-center justify-center hover:text-white/80 hover:bg-stone-950"
+        className="rounded-xl p-4 mb-6 border bg-stone-900 border-white/40 
+        flex items-center justify-center hover:text-white/80 hover:bg-stone-950"
         onClick={() => {
           setHidden(!hidden)
         }}
@@ -46,10 +53,19 @@ const CreateWorkoutSection = () => {
         {hidden ? <ArrowDown /> : <ArrowUp />}
       </button>
       <form
+        action={createWorkout}
         className={
           hidden ? 'hidden' : 'flex flex-col items-center justify-center'
         }
       >
+        <input
+          type="hidden"
+          name="timestamp"
+          id="timestamp"
+          value={params.date}
+          className="hidden"
+        />
+
         {renderExerciseInputs()}
         <div className="flex justify-center items-center w-full">
           <div
