@@ -8,14 +8,21 @@ import SubmitButton from './SubmitButton'
 const CreateWorkoutSection = () => {
   const [hidden, setHidden] = useState(true)
   const [exercises, setExercises] = useState(1)
+  const [disabledRemove, setDisabledRemove] = useState(true)
 
   const handleAddClick = () => {
     setExercises(exercises + 1)
+    setDisabledRemove(false)
   }
 
   const handleRemoveClick = () => {
-    if (exercises > 1) {
+    if (exercises > 2) {
       setExercises(exercises - 1)
+    } else if (exercises === 2) {
+      setExercises(exercises - 1)
+      setDisabledRemove(true)
+    } else {
+      setDisabledRemove(true)
     }
   }
 
@@ -30,7 +37,7 @@ const CreateWorkoutSection = () => {
   return (
     <div className="flex flex-col justify-center items-center">
       <button
-        className="rounded-xl p-4 mb-6 border border-white/40 flex items-center justify-center"
+        className="rounded-xl p-4 mb-6 border border-white/40 flex items-center justify-center hover:text-white/80 hover:border-white/20"
         onClick={() => {
           setHidden(!hidden)
         }}
@@ -47,18 +54,26 @@ const CreateWorkoutSection = () => {
         <div className="flex justify-center items-center w-full">
           <div
             onClick={handleAddClick}
-            className="w-1/2 p-2 border text-center border-white/40 hover:cursor-pointer"
+            className={
+              disabledRemove
+                ? 'w-full p-2 border text-center border-white/40 hover:cursor-pointer hover:text-white/80 hover:border-white/10'
+                : 'w-1/2 p-2 border text-center border-white/40 hover:cursor-pointer hover:text-white/80 hover:border-white/10'
+            }
           >
-            Add New
+            {disabledRemove ? 'Add New Exercise' : 'Add New'}
           </div>
           <div
             onClick={handleRemoveClick}
-            className="w-1/2 p-2 border text-center border-white/40 hover:cursor-pointer"
+            className={
+              disabledRemove
+                ? 'text-transparent hidden'
+                : 'w-1/2 p-2 border text-center border-white/40 hover:cursor-pointer hover:text-white/80 hover:border-white/10'
+            }
           >
             Remove Last
           </div>
         </div>
-        <SubmitButton className="border border-white/40 px-4 py-2 w-full" />
+        <SubmitButton className="border border-white/40 px-4 py-2 w-full hover:text-white/80 hover:border-white/10" />
       </form>
     </div>
   )

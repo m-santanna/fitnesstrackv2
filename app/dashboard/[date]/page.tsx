@@ -3,7 +3,7 @@ import WorkoutSection from '@/components/WorkoutSection'
 import { getSetsByDay } from '@/utils/api'
 import { format } from 'date-fns'
 
-const SetsPage = async ({ params }: any) => {
+const SetsPage = async ({ params }) => {
   const sets = await getSetsByDay(params.date, params.userId)
   console.log(sets)
   const workedOut = sets.length === 0 ? false : true
