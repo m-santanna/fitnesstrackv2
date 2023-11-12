@@ -2,6 +2,7 @@ import CreateWorkoutSection from '@/components/CreateWorkoutSection'
 import WorkoutSection from '@/components/WorkoutSection'
 import { getSetsByDay } from '@/utils/api'
 import { format } from 'date-fns'
+import Link from 'next/link'
 
 const SetsPage = async ({
   params,
@@ -29,7 +30,18 @@ const SetsPage = async ({
           <h1 className={heading}>
             Your workout on {format(new Date(params.date), 'MMMM do')}:
           </h1>
-          <WorkoutSection sets={sets} />
+
+          <div className="flex justify-center items-center w-full">
+            <WorkoutSection sets={sets} />
+          </div>
+
+          <div className="flex justify-center items-center mt-6">
+            <Link
+              href={`/dashboard/${params.date}/edit`}
+              className="py-2 px-12 border border-white/40 rounded-lg"
+              children="Edit"
+            />
+          </div>
         </>
       )}
     </div>
