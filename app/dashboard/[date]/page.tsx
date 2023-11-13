@@ -1,5 +1,7 @@
 import CreateWorkoutSection from '@/components/CreateWorkoutSection'
+import DeleteForm from '@/components/DeleteForm'
 import WorkoutSection from '@/components/WorkoutSection'
+import { deleteWorkout } from '@/utils/actions'
 import { getSetsByDay } from '@/utils/api'
 import { format } from 'date-fns'
 import Link from 'next/link'
@@ -41,6 +43,7 @@ const SetsPage = async ({
               className="py-2 px-12 border border-white/40 rounded-lg"
               children="Edit"
             />
+            <DeleteForm date={params.date} />
           </div>
         </>
       )}

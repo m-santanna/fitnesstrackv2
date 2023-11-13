@@ -1,6 +1,4 @@
 const WorkoutSection = async (props: any) => {
-  console.log(props.sets)
-
   const renderSetsInfo = (set: any) => {
     const infoArray = []
     for (let i = 0; i < set.reps.length; i++) {
