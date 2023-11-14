@@ -1,5 +1,5 @@
 import SaveButton from '@/components/SaveButton'
-import { editWorkout } from '@/utils/actions'
+import { updateWorkout } from '@/utils/actions'
 import { getSetsByDay } from '@/utils/api'
 
 const EditWorkoutSection = async ({ params }: any) => {
@@ -50,7 +50,7 @@ const EditWorkoutSection = async ({ params }: any) => {
         Edit Workout:
       </h1>
       <form
-        action={editWorkout}
+        action={updateWorkout}
         className="flex justify-center items-center flex-col"
       >
         {sets.map((set: any, i: number) => {

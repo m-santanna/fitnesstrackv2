@@ -125,7 +125,7 @@ export const deleteWorkout = async (formData: FormData) => {
 }
 
 
-export const editWorkout = async (formData: FormData) => {
+export const updateWorkout = async (formData: FormData) => {
     const user = await getUserByClerkId()
     const parsed = schemaSet.parse({
             exercisesName: formData.getAll("exerciseName"),
