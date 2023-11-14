@@ -12,6 +12,7 @@ const EditWorkoutSection = async ({ params }: any) => {
         <div className="flex components-background">
           <p className="mx-4 mt-2 proportional-nums">{i + 1}.</p>
           <input
+            key={i}
             type="hidden"
             name="setCount"
             id="setCount"
