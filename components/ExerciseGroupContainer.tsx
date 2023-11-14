@@ -11,8 +11,9 @@ const ExerciseGroupContainer = async ({ userId }: { userId: string }) => {
           <Link
             href="/dashboard/create-exercise-group"
             className="border border-white/40 text-center p-4 mt-2 mb-4 rounded-lg bg-stone-900 hover:bg-stone-950 hover:text-white/80"
-            children="Create New Exercise Group"
-          />
+          >
+            Create New Exercise Group
+          </Link>
         </div>
         {exerciseGroups.map((exerciseGroup) => (
           <Dropdown

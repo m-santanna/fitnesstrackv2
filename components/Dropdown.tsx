@@ -51,9 +51,10 @@ const Dropdown = ({ name, exercises, className }: any) => {
           <Link
             className="border-white/40 bg-stone-700 border-t border-x py-2 px-8 w-full hover:bg-stone-800 text-center"
             href={`/dashboard/edit-exercise-group/${name}`}
-            children={'Edit'}
             onClick={() => setHidden(true)}
-          />
+          >
+            Edit
+          </Link>
           <DeleteButton className="border-white/40 bg-stone-700 border-t border-r py-2 px-8 w-full hover:bg-stone-800" />
         </div>
       </form>
