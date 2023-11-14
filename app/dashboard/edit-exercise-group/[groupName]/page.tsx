@@ -28,7 +28,6 @@ const editExerciseGroup = async ({
 
   const user = await getUserByClerkId()
   const exerciseGroup = await getExerciseGroup(params.groupName, user.id)
-  console.log(exerciseGroup)
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-4xl my-8">Exercise Group Info</h1>
