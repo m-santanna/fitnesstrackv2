@@ -1,7 +1,7 @@
 import { deleteWorkout } from '@/utils/actions'
 import DeleteButton from '@/components/DeleteButton'
 
-const DeleteForm = (props: { date: string }) => {
+const DeleteWorkoutForm = (props: { date: string }) => {
   return (
     <form action={deleteWorkout}>
       <input
@@ -16,4 +16,4 @@ const DeleteForm = (props: { date: string }) => {
   )
 }
 
-export default DeleteForm
+export default DeleteWorkoutForm

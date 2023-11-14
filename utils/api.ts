@@ -29,6 +29,18 @@ export const createExerciseGroup = async (exerciseList: any, clerkId: any) => {
   return exerciseGroup
 }
 
+export const getExerciseGroup = async (groupName: string, userId: string) => {
+  const exerciseGroup = await prisma.exerciseGroup.findUnique({
+    where: {
+      userId_groupName: {
+        userId: userId,
+        groupName: groupName,
+      }
+    }
+  })
+  return exerciseGroup
+}
+
 export const getExerciseGroups = async (userId: string) => {
   const exerciseGroup = await prisma.exerciseGroup.findMany({
     where: {

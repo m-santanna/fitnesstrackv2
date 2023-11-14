@@ -38,6 +38,49 @@ export const createExerciseGroup = async (formData: FormData) => {
     redirect("/dashboard")
 }
 
+export const updateExerciseGroup = async (formData: FormData) => {
+    const parsed = schemaEG.parse({
+            groupName: formData.get("groupName"),
+            exercisesName: formData.getAll("exercisesName"),
+    })
+
+    const user = await getUserByClerkId()
+    await prisma.exerciseGroup.delete({
+        where: {
+            id: formData.get("exerciseGroupId"),
+        }
+    })
+    await prisma.exerciseGroup.create({
+        data: {
+            groupName: parsed.groupName,
+            userId: user.id,
+            exercisesName: parsed.exercisesName,
+        }
+    })
+    revalidatePath("/dashboard")
+    redirect("/dashboard")
+}
+
+
+export const deleteExerciseGroup = async (formData: FormData) => {
+    const parsed = schemaEG.parse({
+            groupName: formData.get("groupName"),
+            exercisesName: formData.getAll("exercisesName"),
+    })
+
+    const user = await getUserByClerkId()
+    await prisma.exerciseGroup.delete({
+        where: {
+            userId_groupName: {
+                userId: user.id,
+                groupName: parsed.groupName,
+            }
+        }
+    })
+    revalidatePath("/dashboard")
+    redirect("/dashboard")
+}
+
 
 export const createWorkout = async (formData: FormData) => {
     const user = await getUserByClerkId()
