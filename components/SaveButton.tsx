@@ -1,15 +1,15 @@
 'use client'
 import { useFormStatus } from 'react-dom'
 
-interface SubmitButtonProps {
+interface SaveButtonProps {
   className?: string
 }
 
-export default function SubmitButton(props: SubmitButtonProps) {
+export default function SaveButton(props: SaveButtonProps) {
   const { pending } = useFormStatus()
   return (
     <button type="submit" className={props.className} disabled={pending}>
-      {pending ? 'Submitting...' : 'Submit'}
+      {pending ? 'Saving...' : 'Save'}
     </button>
   )
 }

@@ -116,4 +116,5 @@ export const editWorkout = async (formData: FormData) => {
         })
     }
     revalidatePath(`/dashboard/${parsed.timestamp}`)
+    redirect(`/dashboard/${parsed.timestamp}`)
 }

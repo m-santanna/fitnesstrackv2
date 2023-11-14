@@ -1,5 +1,3 @@
-'use client'
-
 import { deleteWorkout } from '@/utils/actions'
 import DeleteButton from '@/components/DeleteButton'
 

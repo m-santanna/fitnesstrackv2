@@ -1,10 +1,12 @@
+'use client'
+
 import { useFormStatus } from 'react-dom'
 
-interface SubmitButtonProps {
+interface DeleteButtonProps {
   className?: string
 }
 
-export default function DeleteButton(props: SubmitButtonProps) {
+export default function DeleteButton(props: DeleteButtonProps) {
   const { pending } = useFormStatus()
   return (
     <button type="submit" className={props.className} disabled={pending}>
