@@ -4,7 +4,6 @@ import { getSetsByDay } from '@/utils/api'
 
 const EditWorkoutSection = async ({ params }: any) => {
   const sets = await getSetsByDay(params.date, params.userId)
-  console.log(sets)
 
   const createInputBySet = (set: any) => {
     const inputDivs = []
