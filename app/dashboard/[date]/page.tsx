@@ -40,8 +40,9 @@ const SetsPage = async ({
             <Link
               href={`/dashboard/${params.date}/edit`}
               className="py-2 px-12 border border-white/40 rounded-lg"
-              children="Edit"
-            />
+            >
+              Edit
+            </Link>
             <DeleteWorkoutForm date={params.date} />
           </div>
         </>
