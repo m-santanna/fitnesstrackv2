@@ -8,9 +8,7 @@ export default function Home() {
   return (
     <div className="h-screen w-screen flex justify-center items-center">
       <div className="flex flex-col justify-center items-center">
-        <h1 className="text-4xl mb-2 p-6">
-          Welcome to Matheus's tracking website!
-        </h1>
+        <h1 className="text-4xl mb-2 p-6">Welcome to FitnessTrack!</h1>
         <div>
           <Link href={href} className="">
             <button className="rounded-lg text-xl bg-stone-400 hover:bg-stone-700 px-4 py-2">
