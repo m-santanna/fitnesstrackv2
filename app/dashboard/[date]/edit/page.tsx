@@ -55,7 +55,7 @@ const EditWorkoutSection = async ({ params }: any) => {
       >
         {sets.map((set: any, i: number) => {
           return (
-            <div className="flex flex-col items-center">
+            <div key={i} className="flex flex-col items-center">
               <input
                 type="hidden"
                 name="timestamp"
